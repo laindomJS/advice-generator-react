@@ -1,10 +1,18 @@
-import { Box, Heading } from '@chakra-ui/react'
+import { chakra } from '@chakra-ui/react'
+import { AdviceCard } from './components/AdviceCard'
 
 function App () {
   return (
-    <Box>
-      <Heading>Hello World</Heading>
-    </Box>
+    <chakra.main
+      w='100%'
+      minH='100vh'
+      bgColor='neutral.dark-blue'
+      display='flex'
+      alignItems='center'
+      justifyContent='center'
+    >
+      <AdviceCard />
+    </chakra.main>
   )
 }
 
