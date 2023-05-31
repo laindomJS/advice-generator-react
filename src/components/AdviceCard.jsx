@@ -1,8 +1,8 @@
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Text, Button } from '@chakra-ui/react'
 import { useGetAdvice } from '../hooks/useGetAdvice'
 
 export const AdviceCard = () => {
-  const { advice, loading } = useGetAdvice()
+  const { advice, loading, fetchAdvice } = useGetAdvice()
 
   if (loading || !advice) {
     return <Text>Loading...</Text>
@@ -15,9 +15,20 @@ export const AdviceCard = () => {
       textAlign='center'
       bgColor='neutral.dark-grayish-blue'
       borderRadius='10px'
+      padding='2.5rem'
     >
-      <Text>Hello World</Text>
-      <Text>{advice && advice.advice}</Text>
+      <Text
+        textTransform='uppercase'
+        color='primary.neon-green'
+        letterSpacing='5px'
+        fontSize='14px'
+      >
+        Advice #{advice.id}
+      </Text>
+      <Text mt='1rem' fontSize='24px'>
+        {advice && advice.advice}
+      </Text>
+      <Button onClick={fetchAdvice}>New Advice</Button>
     </Box>
   )
 }

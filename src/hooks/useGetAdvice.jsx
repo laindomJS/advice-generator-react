@@ -5,23 +5,24 @@ export const useGetAdvice = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  useEffect(() => {
-    const fetchAdvice = async () => {
-      const URL_API = 'https://api.adviceslip.com/advice'
-      setLoading(true)
-      try {
-        const response = await fetch(URL_API)
-        const data = await response.json()
-        const { slip } = data
-        setAdvice(slip)
-      } catch (err) {
-        setError(err)
-      } finally {
-        setLoading(false)
-      }
+  const fetchAdvice = async () => {
+    const URL_API = 'https://api.adviceslip.com/advice'
+    setLoading(true)
+    try {
+      const response = await fetch(URL_API)
+      const data = await response.json()
+      const { slip } = data
+      setAdvice(slip)
+    } catch (err) {
+      setError(err)
+    } finally {
+      setLoading(false)
     }
+  }
+
+  useEffect(() => {
     fetchAdvice()
   }, [])
 
-  return { advice, loading, error }
+  return { advice, loading, error, fetchAdvice }
 }
