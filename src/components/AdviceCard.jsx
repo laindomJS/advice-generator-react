@@ -1,34 +1,55 @@
-import { Box, Text, Button } from '@chakra-ui/react'
+import { Box, Text, Button, Image } from '@chakra-ui/react'
 import { useGetAdvice } from '../hooks/useGetAdvice'
+import desktopSeparator from '../assets/pattern-divider-desktop.svg'
+import mobileSeparator from '../assets/pattern-divider-mobile.svg'
 
 export const AdviceCard = () => {
-  const { advice, loading, fetchAdvice } = useGetAdvice()
-
-  if (loading || !advice) {
-    return <Text>Loading...</Text>
-  }
+  const { advice, loading, fetchAdvice, error } = useGetAdvice()
 
   return (
     <Box
-      w='45%'
+      as='article'
+      w={{ base: '100%', md: '45%' }}
       h='fit-content'
       textAlign='center'
       bgColor='neutral.dark-grayish-blue'
       borderRadius='10px'
       padding='2.5rem'
+      position='relative'
     >
-      <Text
-        textTransform='uppercase'
-        color='primary.neon-green'
-        letterSpacing='5px'
-        fontSize='14px'
+      {error && <Text fontSize='25px' my='2rem' color='red.500'>{error}</Text>}
+      {
+        advice &&
+          <>
+            <Text
+              textTransform='uppercase'
+              color='primary.neon-green'
+              letterSpacing='5px'
+              fontSize={{ base: '12px', md: '14px' }}
+            >
+              Advice #{advice.id}
+            </Text>
+            <Text mt='1rem' fontSize={{ base: '18px', md: '18px', lg: '22px' }}>
+              {advice.advice}
+            </Text>
+          </>
+      }
+      <Image
+        mx='auto'
+        src={mobileSeparator}
+        srcSet={`${desktopSeparator} 600w, ${desktopSeparator} 1200w`}
+        my='1rem'
+      />
+      <Button
+        onClick={fetchAdvice}
+        position='absolute'
+        left='50%'
+        transform='translateX(-50%)'
+        bottom='-20px'
+        bgColor='primary.neon-green'
       >
-        Advice #{advice.id}
-      </Text>
-      <Text mt='1rem' fontSize='24px'>
-        {advice && advice.advice}
-      </Text>
-      <Button onClick={fetchAdvice}>New Advice</Button>
+        {loading ? 'Loading...' : 'New Advice'}
+      </Button>
     </Box>
   )
 }

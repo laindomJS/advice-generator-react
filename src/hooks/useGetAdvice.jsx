@@ -14,7 +14,7 @@ export const useGetAdvice = () => {
       const { slip } = data
       setAdvice(slip)
     } catch (err) {
-      setError(err)
+      setError(error)
     } finally {
       setLoading(false)
     }

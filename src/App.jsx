@@ -10,6 +10,7 @@ function App () {
       display='flex'
       alignItems='center'
       justifyContent='center'
+      p={{ base: '1rem' }}
     >
       <AdviceCard />
     </chakra.main>
