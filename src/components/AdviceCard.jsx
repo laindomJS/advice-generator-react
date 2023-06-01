@@ -37,7 +37,11 @@ export const AdviceCard = () => {
               >
                 Advice #{advice.id}
               </Text>
-              <Text mt='1rem' fontSize={{ base: '18px', md: '18px', lg: '22px' }}>
+              <Text
+                mt='1rem'
+                fontSize={{ base: '18px', md: '18px', lg: '22px' }}
+                color='white'
+              >
                 {advice.advice}
               </Text>
             </>
